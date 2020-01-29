@@ -1,0 +1,23 @@
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+#wrapper {
+    width: 1200px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+img {
+    width: 210px;
+    height: 390px;
+}
+
+.title {
+    width: 210px;
+}
+
+#wrapper > div.d-flex.justify-content-between.mt-5.mx-auto img {
+    width: 190px;
+    height: 370px;
+}

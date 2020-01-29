@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'log_reg/css/style.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <title>Login Reg App</title>
+</head>
+<body>
+    <nav class="bg-light border">
+        <h3 class="navbar-text ml-4 m-1">Luminous Tarot</h3>
+    </nav>
+    {% if messages %}
+    <div class="alert alert-danger">
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+    <div id="wrapper">
+        <form id="reg" class="border rounded" action="register" method="POST">
+            {% csrf_token %}
+            <legend>Registration</legend>
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input class="form-control" type="text" name="first-name">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input class="form-control" type="text" name="last-name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control" type="text" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input class="form-control" type="text" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm-pass">Confirm Password:</label>
+                <input class="form-control" type="text" name="confirm-pass">
+            </div>
+            <button type="submit" class="btn btn-dark">Register</button>
+        </form>
+        <form id="login" class="border rounded" action="login" method="POST">
+            {% csrf_token %}
+            <legend>Login</legend>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control" type="text" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input class="form-control" type="text" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</body>
+</html>

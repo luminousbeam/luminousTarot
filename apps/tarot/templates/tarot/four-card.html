@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'tarot/css/style.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <title>Decision Maker Reading</title>
+</head>
+<body>
+    <nav class="bg-light border">
+        <h3 class="navbar-text ml-4 m-1">Luminous Tarot</h3>
+        <ul class="nav float-right m-2">
+            <li class="nav-item">
+                <a class="nav-link" href="/tarot">About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="meanings" role="button" aria-haspopup="true" aria-expanded="false">Meanings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="major_arcana">Major Arcana</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="minor_arcana">Minor Arcana</a>
+                    <a class="dropdown-item pl-5" href="#">Cups</a>
+                    <a class="dropdown-item pl-5" href="#">Swords</a>
+                    <a class="dropdown-item pl-5" href="#">Pentacles</a>
+                    <a class="dropdown-item pl-5" href="#">Wands</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Readings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/tarot/readings">All Readings</a>
+                    <a class="dropdown-item" href="/tarot/readings/three_card">Three Card</a>
+                    <a class="dropdown-item" href="/tarot/readings/four_card">Four Card</a>
+                    <a class="dropdown-item" href="#">Relationship</a>
+                </div>
+            </li>
+            {% if 'name' not in request.session%}
+            <li class="nav-item">
+                <a class="nav-link" href="/entry">Login/Reg</a>
+            </li>
+                {% else %}
+            <li>
+                <a href="/user_account/{{request.session.id}}" class="nav-link">My Account</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div id="wrapper" class="mx-auto">
+        <div class="reading-info">
+            <h4 class="text-center">Decision Maker Reading</h4>
+            <p class="text-center">User this spread to look at the situations from all perspectives and to make best possible decision. It fits "Should I" or "Should I Not" questions as well.</p>
+        </div>
+        <div class="d-flex justify-content-around mt-5 mx-auto" style="width:1000px; height:450px;">
+            <div class="card d-flex flex-column border-0">
+                <a href="/tarot/{{you_card.category}}_arcana/{{you_card.id}}">
+                    <img class="four-card bg-info p-3 rounded" src="{% static you_card.image|safe %}" alt="{{you_card.category}} arcana: '{{you_card.name}}' card.">
+                <a class="font-weight-bold p-2 m-1 text-center text-dark" href="/tarot/{{you_card.category}}_arcana/{{you_card.id}}">{{you_card.name}}</a>
+            </div>
+            <div class="card d-flex flex-column border-0">
+                <a href="/tarot/{{unknown_card.category}}_arcana/{{unknown_card.id}}">
+                    <img class="four-card bg-info p-3 rounded" src="{% static unknown_card.image|safe %}" alt="{{unknown_card.category}} arcana: '{{unknown_card.name}}' card.">
+                </a>
+                <a class="font-weight-bold p-2 m-1 text-center text-dark" href="/tarot/{{unknown_card.category}}_arcana/{{unknown_card.id}}">{{unknown_card.name}}</a>
+            </div>
+            <div class="card d-flex flex-column border-0">
+                <a href="/tarot/{{known_card.category}}_arcana/{{known_card.id}}">
+                    <img class="four-card bg-info p-3 rounded" src="{% static known_card.image|safe %}" alt="{{known_card.category}} arcana: '{{known_card.name}}' card.">
+                </a>
+                <a class="font-weight-bold p-2 m-1 text-center text-dark" href="/tarot/{{known_card.category}}_arcana/{{known_card.id}}">{{known_card.name}}</a>
+            </div>
+            <div class="card d-flex flex-column border-0">
+                <a href="/tarot/{{action_card.category}}_arcana/{{action_card.id}}">
+                    <img class="four-card bg-info p-3 rounded" src="{% static action_card.image|safe %}" alt="{{action_card.category}} arcana: '{{action_card.name}}' card.">
+                </a>
+                <a class="font-weight-bold p-2 m-1 text-center text-dark" href="/tarot/{{action_card.category}}_arcana/{{action_card.id}}">{{action_card.name}}</a>
+            </div>
+            
+        </div>
+    </div>
+    <div class="reading-card-info mx-auto m-2" style="width:400px;">
+        <p><u>You:</u> This card represents you and your energy at the time of the reading.</p>
+        <p><u>The Unknown:</u> This card represents people, places, or events in your life that you're either not aware of right now, or unwilling to face.</p>
+        <p><u>The Known:</u> This card represents the details you are aware of. It is also a clue as to what you can reasonably deal with right now.</p>
+        <p><u>The Action:</u> This card encourages you to take a certain type of action, representative by the card's meaning.</p>
+    </div>
+    <script>$('.dropdown-toggle').dropdown()</script>
+</body>
+</html>

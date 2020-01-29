@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'tarot/css/style.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <title>Tarot Meanings</title>
+</head>
+<body>
+    <nav class="bg-light border">
+        <h3 class="navbar-text ml-4 m-1">Luminous Tarot</h3>
+        <ul class="nav float-right m-2">
+            <li class="nav-item">
+                <a class="nav-link" href="/tarot">About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Meanings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/tarot/major_arcana">Major Arcana</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/tarot/minor_arcana">Minor Arcana</a>
+                    <a class="dropdown-item pl-5" href="#">Cups</a>
+                    <a class="dropdown-item pl-5" href="#">Swords</a>
+                    <a class="dropdown-item pl-5" href="#">Pentacles</a>
+                    <a class="dropdown-item pl-5" href="#">Wands</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="readings" role="button" aria-haspopup="true" aria-expanded="false">Readings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/tarot/readings">All Readings</a>
+                    <a class="dropdown-item" href="/tarot/readings/three_card">Three Card</a>
+                    <a class="dropdown-item" href="/tarot/readings/four_card">Four Card</a>
+                    <a class="dropdown-item" href="#">Relationship</a>
+                </div>
+            </li>
+            {% if 'name' not in request.session%}
+            <li class="nav-item">
+                <a class="nav-link" href="/entry">Login/Reg</a>
+            </li>
+                {% else %}
+            <li>
+                <a href="/user_account/{{request.session.id}}" class="nav-link">My Account</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div id="wrapper" class="mx-auto">
+        <div class="tarot-info mt-5">
+            <h1 class="text-center">{{one_major.name}}</h1>
+            <div class="d-flex justify-content-between mt-4 text-center">
+                <div class="major mx-auto" style="width:800px;">
+                    <img class="bg-info p-3 rounded" src="{% static one_major.image|safe %}" alt="{{one_major.category}} arcana: '{{one_major.name}}' card.">
+                    <div class="info m-4">
+                        <p class="text-uppercase m-1"><u>Meaning:</u></p>
+                        <p>{{one_major.meaning_up}}</p>
+                        <p class="text-uppercase m-1"><u>Reversed Meaning:</u></p>
+                        <p>{{one_major.meaning_rev}}</p>
+                        <p class="text-uppercase m-1"><u>Description:</u></p>
+                        <p>{{one_major.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$('.dropdown-toggle').dropdown()</script>
+</body>
+</html>

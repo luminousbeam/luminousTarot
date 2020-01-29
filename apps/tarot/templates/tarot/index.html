@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'tarot/css/style.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <title>About Tarot</title>
+</head>
+<body>
+    <nav class="bg-light border">
+        <h3 class="navbar-text ml-4 m-1">Luminous Tarot</h3>
+        <ul class="nav float-right m-2">
+            <li class="nav-item">
+                <a class="nav-link" href="/tarot">About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="meanings" role="button" aria-haspopup="true" aria-expanded="false">Meanings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="major_arcana">Major Arcana</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="minor_arcana">Minor Arcana</a>
+                    <a class="dropdown-item pl-5" href="#">Cups</a>
+                    <a class="dropdown-item pl-5" href="#">Swords</a>
+                    <a class="dropdown-item pl-5" href="#">Pentacles</a>
+                    <a class="dropdown-item pl-5" href="#">Wands</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="readings" role="button" aria-haspopup="true" aria-expanded="false">Readings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="readings">All Readings</a>
+                    <a class="dropdown-item" href="readings/three_card">Three Card</a>
+                    <a class="dropdown-item" href="readings/four_card">Four Card</a>
+                    <a class="dropdown-item" href="#">Relationship</a>
+                </div>
+            </li>
+            {% if 'name' not in request.session%}
+            <li class="nav-item">
+                <a class="nav-link" href="/entry">Login/Reg</a>
+            </li>
+                {% else %}
+            <li>
+                <a href="/user_account/{{request.session.id}}" class="nav-link">My Account</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div id="wrapper" class="mx-auto">
+        <div class="tarot-info m-5 text-center">
+            <h2>What is Tarot?</h2>
+            <img class="mb-4 mx-auto" src="{% static 'tarot/images/tarot-cards.jpg' %}" alt="tarot card banner" style="width:1040px;">
+            <!-- TODO: get rid of all inline styling and move that to css sheet -->
+            <p>The Tarot is a deck of 78 cards, each with its own imagery, symbolism and story. The 22 Major Arcana cards represent life's karmic and spiritual lessons, and the 56 Minor Arcana cards reflect the trials and tribulations that we experience on a daily basis.</p>
+
+            <p>Some may say that Tarot cards are simply ink on paper. However, what I have discovered from reading the Tarot cards daily for over twenty years is this: Tarot is the storybook of our life, the mirror to our soul, and the key to our inner wisdom.</p>
+            
+            <p>Every spiritual lesson we meet in our lives can be found in the seventy-eight Tarot cards. And when we consult the Tarot, we’ll get shown the exact lessons we need to learn and master to live an inspired life. It’s like holding up a mirror to yourself so that you can access your subconscious mind and tap into the wisdom (and answers) that lives in us all.</p>
+            
+            <p>Tarot is perfect for self-development, making choices, manifesting goals, coaching others, planning a business, meditating—you name it. Simply ask a question, pull a card, and dive into the imagery of the card to give you instant access to your inner wisdom and the answer you need.</p>
+        </div>
+        <div class="tarot-info m-5 text-center">
+            <h2>How does Tarot work?</h2>
+            <p>While many people believe that Tarot will tell you the future, making predictions are not really what Tarot cards are about. When it comes to Tarot, fortune-telling is out, and intuition is in, especially if you want to create your ideal future and manifest your goals.</p>
+
+            <p>The most powerful way to read the Tarot is to use the cards to access your intuition and your inner wisdom. The imagery in the cards give you instant access to your subconscious mind and your intuition. And from this place of inner power and wisdom, you can discover how to make positive changes now so you can manifest your goals and your dreams in the future.</p>
+        </div>
+    </div>
+    <script>$('.dropdown-toggle').dropdown()</script>
+</body>
+</html>

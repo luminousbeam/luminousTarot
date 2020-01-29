@@ -1,0 +1,21 @@
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+#wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#reg, #login {
+    width: 450px;
+    margin: 40px;
+    padding: 40px;
+}
+
+#login {
+    height: 350px;
+}

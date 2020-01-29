@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- TODO: fix link routes -->
+<!-- TODO: make this edit account view and create a new my-acct view that displays saved readings -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'tarot/css/style.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <title>My Tarot Account</title>
+</head>
+<body>
+    <nav class="bg-light border">
+        <h3 class="navbar-text ml-4 m-1">Luminous Tarot</h3>
+        <ul class="nav float-right m-2">
+            <li class="nav-item">
+                <a class="nav-link" href="/tarot">About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Meanings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="major_arcana">Major Arcana</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="minor_arcana">Minor Arcana</a>
+                    <a class="dropdown-item pl-5" href="#">Cups</a>
+                    <a class="dropdown-item pl-5" href="#">Swords</a>
+                    <a class="dropdown-item pl-5" href="#">Pentacles</a>
+                    <a class="dropdown-item pl-5" href="#">Wands</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="readings" role="button" aria-haspopup="true" aria-expanded="false">Readings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="readings">All Readings</a>
+                    <a class="dropdown-item" href="readings/three_card">Three Card</a>
+                    <a class="dropdown-item" href="readings/four_card">Four Card</a>
+                    <a class="dropdown-item" href="#">Relationship</a>
+                </div>
+            </li>
+            <li>
+                <a href="/user_account/{{request.session.id}}" class="nav-link">My Account</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    {% if messages %}
+    <div class="alert alert-danger">
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+    </div>
+    {% endif %}
+    <div id="wrapper">
+        <form id="account-form" class="border p-3" action="/update_account/{{user.id}}" method="POST">
+            {% csrf_token %}
+            <legend>Edit My Account</legend>
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" class="form-control" name="first-name" value="{{user.first_name}}">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" class="form-control" name="last-name" value="{{user.last_name}}">
+            </div>
+            <div class="form-group">
+                <label for="first-name">Email:</label>
+                <input type="text" class="form-control" name="email" value="{{user.email}}">
+            </div>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

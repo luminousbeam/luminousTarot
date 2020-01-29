@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'tarot/css/style.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <title>Major Arcana</title>
+</head>
+<body>
+    <nav class="bg-light border">
+        <h3 class="navbar-text ml-4 m-1">Luminous Tarot</h3>
+        <ul class="nav float-right m-2">
+            <li class="nav-item">
+                <a class="nav-link" href="/tarot">About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Meanings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="major_arcana">Major Arcana</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="minor_arcana">Minor Arcana</a>
+                    <a class="dropdown-item pl-5" href="#">Cups</a>
+                    <a class="dropdown-item pl-5" href="#">Swords</a>
+                    <a class="dropdown-item pl-5" href="#">Pentacles</a>
+                    <a class="dropdown-item pl-5" href="#">Wands</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="readings" role="button" aria-haspopup="true" aria-expanded="false">Readings</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="readings">All Readings</a>
+                    <a class="dropdown-item" href="readings/three_card">Three Card</a>
+                    <a class="dropdown-item" href="readings/four_card">Four Card</a>
+                    <a class="dropdown-item" href="#">Relationship</a>
+                </div>
+            </li>
+            {% if 'name' not in request.session%}
+            <li class="nav-item">
+                <a class="nav-link" href="/entry">Login/Reg</a>
+            </li>
+                {% else %}
+            <li>
+                <a href="/user_account/{{request.session.id}}" class="nav-link">My Account</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div id="wrapper" class="mx-auto">
+        <div class="tarot-info mt-5">
+            <h1 class="text-center text-capitalize">Major Arcana Cards</h1>
+            <p class="text-center">The 22 Major Arcana cards represent life's karmic and spiritual lessons. They represent a path to spiritual self-awareness and depict the various stages we encounter as we search for greater meaning and understanding. In this way, the Major Arcana cards hold deeply meaningful lessons on a soul level.</p>
+            <div class="d-flex justify-content-between mt-5">
+                {% for card in major_arcana %}
+                <div class="card d-flex flex-column border-0">
+                    <a href="major_arcana/{{card.id}}">
+                        <img class="bg-info p-3 rounded" src="{% static card.image|safe %}" alt="{{card.category}} arcana: '{{card.name}}' card.">
+                    </a>
+                    <a class="font-weight-bold p-2 m-1 text-center text-dark" href="major_arcana/{{card.id}}">{{card.name}}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>$('.dropdown-toggle').dropdown()</script>
+</body>
+</html>
